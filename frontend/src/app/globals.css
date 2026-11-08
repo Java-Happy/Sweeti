@@ -686,3 +686,14 @@ input:focus-visible {
     font-size: 14px;
   }
 }
+
+
+.nav-item:disabled {
+  opacity: .48;
+  cursor: not-allowed;
+  transform: none;
+}
+.nav-item:disabled:hover {
+  background: transparent;
+  border-color: transparent;
+}
