@@ -441,12 +441,12 @@ def build_market_prompt(coins):
 
 
 @app.get("/api/ai/brief")
-async def ai_latest_brief():
+async def ai_latest_brief(user: dict = Depends(get_current_user)):
     return {"brief": get_latest_ai_brief(), "model": OLLAMA_MODEL}
 
 
 @app.post("/api/ai/brief/generate")
-async def ai_generate_brief():
+async def ai_generate_brief(user: dict = Depends(get_current_user)):
     coins = get_latest_market_context(250)
     if not coins:
         raise HTTPException(status_code=409, detail="数据库暂无行情快照")
@@ -460,7 +460,7 @@ async def ai_generate_brief():
 
 
 @app.post("/api/ai/chat")
-async def ai_chat(request: ChatRequest):
+async def ai_chat(request: ChatRequest, user: dict = Depends(get_current_user)):
     message = request.message.strip()
     if not message:
         raise HTTPException(status_code=400, detail="问题不能为空")
