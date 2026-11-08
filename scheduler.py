@@ -1,5 +1,6 @@
 ﻿import logging
 import time
+from datetime import datetime, timezone
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
@@ -119,7 +120,8 @@ def start_scheduler():
         replace_existing=True,
         max_instances=1,
         coalesce=True,
-        misfire_grace_time=60
+        misfire_grace_time=60,
+        next_run_time=datetime.now(timezone.utc)
     )
 
     scheduler.start()
