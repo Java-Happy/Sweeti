@@ -169,7 +169,7 @@ export default function MarketChart() {
 
     const chart = createChart(containerRef.current, {
       width: containerRef.current.clientWidth,
-      height: 340,
+      height: 420,
       layout: {
         background: { type: ColorType.Solid, color: "#0b1220" },
         textColor: "#8b9bb4",
@@ -279,7 +279,7 @@ export default function MarketChart() {
         </div>
       </div>
 
-      <div className="relative min-h-[340px] w-full overflow-hidden rounded-xl border border-white/5 bg-[#0b1220]">
+      <div className="relative min-h-[420px] w-full overflow-hidden rounded-xl border border-white/5 bg-[#0b1220]">
         <div ref={containerRef} className="w-full" />
 
         {loading && (
