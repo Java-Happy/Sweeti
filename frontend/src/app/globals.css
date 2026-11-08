@@ -895,3 +895,141 @@ body {
     animation: none;
   }
 }
+
+
+/* ===== CRYPTO RADAR 2.3 — DESKTOP COMMAND CENTER ===== */
+.dashboard-content {
+  max-width: 1800px;
+  padding-left: clamp(28px, 3.2vw, 58px);
+  padding-right: clamp(28px, 3.2vw, 58px);
+}
+
+.middle-grid,
+.bottom-grid {
+  grid-template-columns: minmax(0, 1.95fr) minmax(330px, .9fr);
+  gap: 18px;
+}
+
+.chart-panel {
+  min-height: 590px;
+}
+
+.chart-live-container {
+  min-height: 430px;
+  padding: 14px;
+}
+
+.chart-live-container .space-y-4 {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.chart-live-container .space-y-4 > div:last-child {
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.intelligence-panel {
+  min-height: 590px;
+  background:
+    radial-gradient(ellipse at 85% 12%, rgba(51, 211, 198, .10), transparent 38%),
+    linear-gradient(155deg, rgba(16, 32, 47, .98), rgba(8, 17, 29, .99));
+}
+
+.intelligence-panel .ai-status-card {
+  padding: 18px;
+  margin-top: 22px;
+}
+
+.intelligence-panel .ai-model-name {
+  font-size: 28px;
+  margin-top: 16px;
+}
+
+.intelligence-panel .intel-list {
+  margin-top: 20px;
+}
+
+.intelligence-panel .intel-item {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.intelligence-panel .intel-item b {
+  font-size: 11px;
+}
+
+.intelligence-panel .intel-item small {
+  font-size: 9px;
+}
+
+.intelligence-panel .intel-item em {
+  border: 1px solid rgba(224, 180, 105, .18);
+  border-radius: 20px;
+  padding: 4px 8px;
+  background: rgba(224, 180, 105, .06);
+}
+
+.metric-card,
+.panel {
+  backdrop-filter: blur(14px);
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+}
+
+.table-head,
+.table-row {
+  grid-template-columns: 1.25fr 1.05fr .9fr 1fr .8fr;
+}
+
+.table-row > span:nth-child(2),
+.table-row > span:nth-child(3) {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 1500px) {
+  .dashboard-content {
+    padding-top: 36px;
+  }
+  .ticker-item > strong {
+    font-size: 18px;
+  }
+  .metric-card {
+    min-height: 138px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .middle-grid,
+  .bottom-grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  }
+  .chart-panel,
+  .intelligence-panel {
+    min-height: 0;
+  }
+  .chart-live-container {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 760px) {
+  .dashboard-content {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+  .middle-grid,
+  .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+  .chart-live-container {
+    min-height: 310px;
+    padding: 6px;
+  }
+  .intelligence-panel {
+    min-height: 0;
+  }
+}
