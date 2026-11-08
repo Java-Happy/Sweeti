@@ -147,6 +147,8 @@ export default function Home() {
             <button
               key={item.label}
               className={`nav-item ${activeNav === item.label ? "active" : ""}`}
+              disabled={item.label !== "市场总览"}
+              title={item.label === "市场总览" ? item.label : "功能开发中"}
               onClick={() => setActiveNav(item.label)}
             >
               <span className="nav-icon">{item.icon}</span>
