@@ -63,6 +63,30 @@ async def collect_market_job():
             run_id
         )
 
+        try:
+            from main import build_market_prompt, call_ollama, OLLAMA_MODEL
+            from storage import get_latest_market_context, save_ai_brief
+
+            market_context = get_latest_market_context(250)
+            if market_context:
+                snapshot_at = max(
+                    (coin.get("captured_at") or "" for coin in market_context),
+                    default=None
+                )
+                brief = await call_ollama(
+                    build_market_prompt(market_context),
+                    timeout=240
+                )
+                saved_brief = save_ai_brief(
+                    brief, OLLAMA_MODEL, snapshot_at
+                )
+                logger.info(
+                    "Qwen3 市场简报已更新，记录ID：%s",
+                    saved_brief["id"]
+                )
+        except Exception:
+            logger.exception("本轮行情采集成功，但 Qwen3 简报生成失败")
+
     except Exception as exc:
         duration = round(time.perf_counter() - started, 2)
 
