@@ -34,3 +34,6 @@ npm-debug.log*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Local authentication signing secret
+.auth_secret
