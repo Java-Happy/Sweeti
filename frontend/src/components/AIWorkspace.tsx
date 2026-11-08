@@ -27,7 +27,11 @@ export default function AIWorkspace() {
     let active = true;
     const loadBrief = async () => {
       try {
-        const response = await fetch(API_BASE_URL + "/api/ai/brief", { cache: "no-store" });
+        const token = window.sessionStorage.getItem("crypto-radar-session");
+        const response = await fetch(API_BASE_URL + "/api/ai/brief", {
+          cache: "no-store",
+          headers: token ? { Authorization: "Bearer " + token } : {}
+        });
         if (!response.ok) throw new Error("简报服务暂不可用");
         const payload = await response.json();
         if (active) {
@@ -59,7 +63,10 @@ export default function AIWorkspace() {
     try {
       const response = await fetch(API_BASE_URL + "/api/ai/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + (window.sessionStorage.getItem("crypto-radar-session") || "")
+        },
         body: JSON.stringify({
           message: question,
           conversation: messages.slice(-4)
