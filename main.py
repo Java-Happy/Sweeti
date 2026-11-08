@@ -1,4 +1,4 @@
-﻿from scheduler import start_scheduler, stop_scheduler
+from scheduler import start_scheduler, stop_scheduler
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 import time
@@ -6,6 +6,8 @@ import os
 
 import httpx
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import StreamingResponse
+import json
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -422,29 +424,66 @@ async def ai_chat(request: ChatRequest):
         raise HTTPException(status_code=400, detail="问题不能为空")
     if len(message) > 4000:
         raise HTTPException(status_code=413, detail="单条问题最多 4000 字符")
-    coins = get_latest_market_context(100)
+
+    # 只取市值排名靠前的 30 个币种，减少每轮提示词长度。
+    coins = get_latest_market_context(30)
     market_lines = []
     for coin in coins:
         change = coin.get("price_change_24h")
         change_text = f"{change:+.2f}%" if isinstance(change, (int, float)) else "N/A"
         market_lines.append(
-            f"{str(coin.get('symbol') or '').upper()} {coin.get('name')}: "
-            f"${coin.get('current_price')} ({change_text} 24h)"
+            f"{str(coin.get('symbol') or '').upper()}: "
+            f"${coin.get('current_price')} ({change_text}/24h)"
         )
-    history = request.conversation[-8:]
-    history_text = "\n".join(
-        f"{'用户' if item.get('role') == 'user' else '助手'}：{str(item.get('content', ''))[:2000]}"
+
+    # 保留最近 4 条消息，并限制单条历史长度。
+    history = request.conversation[-4:]
+    history_text = "\\n".join(
+        f"{'用户' if item.get('role') == 'user' else '助手'}：{str(item.get('content', ''))[:800]}"
         for item in history if item.get("role") in ("user", "assistant")
     )
     prompt = (
-        "你是 Crypto Radar 内置的 Qwen3 加密市场助手。用中文回答并结合最新数据库行情；"
-        "若数据没有覆盖用户问题，坦诚说明。不要假装拥有实时新闻或交易所原生K线，"
-        "不要承诺收益。区分事实、推断和风险，不构成投资建议。\n\n"
-        "最新行情快照：\n" + ("\n".join(market_lines) if market_lines else "暂无行情快照") +
-        "\n\n最近对话：\n" + history_text + "\n\n用户当前问题：\n" + message
+        "你是 Crypto Radar 内置的 Qwen3 加密市场助手。请用中文简洁回答，优先给结论和关键依据。"
+        "结合最新数据库行情；数据未覆盖时坦诚说明。不要编造实时新闻、技术指标或交易所原生K线，"
+        "区分事实、推断和风险，不承诺收益。\n\n"
+        "最新行情（CoinGecko快照）：\n" + ("\\n".join(market_lines) if market_lines else "暂无行情快照") +
+        "\\n\n最近对话：\n" + history_text + "\\n\n用户当前问题：\n" + message
     )
-    try:
-        answer = await call_ollama(prompt, timeout=240)
-        return {"model": OLLAMA_MODEL, "answer": answer, "market_context_coins": len(coins)}
-    except httpx.HTTPError as exc:
-        raise HTTPException(status_code=503, detail=f"Qwen3 暂时不可用：{exc}")
+
+    async def token_stream():
+        try:
+            timeout = httpx.Timeout(connect=10, read=240, write=30, pool=10)
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                async with client.stream(
+                    "POST",
+                    f"{OLLAMA_URL}/api/generate",
+                    json={
+                        "model": OLLAMA_MODEL,
+                        "prompt": prompt,
+                        "stream": True,
+                        "keep_alive": "10m",
+                        "options": {
+                            "temperature": 0.2,
+                            "num_ctx": 2048,
+                            "num_predict": 512
+                        }
+                    }
+                ) as response:
+                    response.raise_for_status()
+                    async for line in response.aiter_lines():
+                        if not line:
+                            continue
+                        chunk = json.loads(line)
+                        token = chunk.get("response", "")
+                        if token:
+                            yield token
+                        if chunk.get("done"):
+                            break
+        except Exception as exc:
+            yield f"\\n\\n[Qwen3 请求中断：{str(exc)}]"
+
+    return StreamingResponse(
+        token_stream(),
+        media_type="text/plain; charset=utf-8",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
+    )
