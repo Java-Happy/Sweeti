@@ -225,3 +225,44 @@ def get_database_stats():
         "collection_runs": run_count,
         "database": str(DB_PATH)
     }
+
+
+
+def get_latest_market_context(limit=250):
+    with get_connection() as conn:
+        rows = conn.execute("""
+            SELECT c.coin_id, c.symbol, c.name, c.market_cap_rank,
+                   s.current_price, s.price_change_24h, s.total_volume,
+                   s.market_cap, s.high_24h, s.low_24h, s.captured_at
+            FROM market_snapshots s
+            JOIN coins c ON c.coin_id = s.coin_id
+            WHERE s.currency = 'usd'
+              AND s.captured_at = (
+                  SELECT MAX(s2.captured_at)
+                  FROM market_snapshots s2
+                  WHERE s2.coin_id = s.coin_id AND s2.currency = 'usd'
+              )
+            ORDER BY c.market_cap_rank ASC
+            LIMIT ?
+        """, (max(1, min(int(limit), 250)),)).fetchall()
+    return [dict(row) for row in rows]
+
+
+def save_ai_brief(content, model, source_snapshot_at=None):
+    generated_at = now_utc()
+    with get_connection() as conn:
+        cursor = conn.execute("""
+            INSERT INTO ai_briefs (generated_at, model, content, source_snapshot_at)
+            VALUES (?, ?, ?, ?)
+        """, (generated_at, model, content, source_snapshot_at))
+        brief_id = cursor.lastrowid
+    return {"id": brief_id, "generated_at": generated_at, "model": model}
+
+
+def get_latest_ai_brief():
+    with get_connection() as conn:
+        row = conn.execute("""
+            SELECT id, generated_at, model, content, source_snapshot_at
+            FROM ai_briefs ORDER BY id DESC LIMIT 1
+        """).fetchone()
+    return dict(row) if row else None
