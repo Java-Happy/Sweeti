@@ -28,6 +28,8 @@ type HistoryResponse = {
   history: HistoryItem[];
 };
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
+
 const ASSETS = [
   { id: "bitcoin", symbol: "BTC", name: "Bitcoin" },
   { id: "ethereum", symbol: "ETH", name: "Ethereum" },
@@ -66,7 +68,7 @@ export default function MarketChart() {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/market/history/${asset}`,
+          `${API_BASE_URL}/api/market/history/${asset}`,
           { cache: "no-store" }
         );
 
