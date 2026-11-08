@@ -1,0 +1,912 @@
+{
+  "version": 1,
+  "purpose": "Initial candidate seed list for CryptoRadarAI X account monitoring test",
+  "generated_at": "2026-11-08",
+  "verification_note": "Candidate list only. Before polling, resolve each username through the X API and mark inactive, renamed, protected, suspended, or not-found accounts. Inclusion is not an endorsement and does not imply investment reliability.",
+  "source_basis": [
+    "Current 2026 crypto X account roundups and analyst directories",
+    "Official project and organization identities; validate against their official websites before production monitoring"
+  ],
+  "accounts": [
+    {
+      "name": "CoinDesk",
+      "username": "CoinDesk",
+      "profile_url": "https://x.com/CoinDesk",
+      "category": "media",
+      "focus": "Global crypto journalism and market coverage",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "The Block",
+      "username": "TheBlock__",
+      "profile_url": "https://x.com/TheBlock__",
+      "category": "media",
+      "focus": "Institutional and market news",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Wu Blockchain",
+      "username": "WuBlockchain",
+      "profile_url": "https://x.com/WuBlockchain",
+      "category": "media",
+      "focus": "Asia-focused crypto and exchange news",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Cointelegraph",
+      "username": "Cointelegraph",
+      "profile_url": "https://x.com/Cointelegraph",
+      "category": "media",
+      "focus": "Global crypto and blockchain news",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Bitcoin Magazine",
+      "username": "BitcoinMagazine",
+      "profile_url": "https://x.com/BitcoinMagazine",
+      "category": "media",
+      "focus": "Bitcoin ecosystem and policy",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Decrypt",
+      "username": "DecryptMedia",
+      "profile_url": "https://x.com/DecryptMedia",
+      "category": "media",
+      "focus": "Crypto technology and industry reporting",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "The Defiant",
+      "username": "TheDefiant",
+      "profile_url": "https://x.com/TheDefiant",
+      "category": "media",
+      "focus": "DeFi and onchain ecosystem reporting",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "DL News",
+      "username": "DLNewsInfo",
+      "profile_url": "https://x.com/DLNewsInfo",
+      "category": "media",
+      "focus": "Digital asset and DeFi journalism",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Blockworks",
+      "username": "Blockworks_",
+      "profile_url": "https://x.com/Blockworks_",
+      "category": "media",
+      "focus": "Institutional crypto markets and research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "CryptoSlate",
+      "username": "CryptoSlate",
+      "profile_url": "https://x.com/CryptoSlate",
+      "category": "media",
+      "focus": "Crypto news, data and analyst coverage",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "PANews",
+      "username": "PANewsCN",
+      "profile_url": "https://x.com/PANewsCN",
+      "category": "media",
+      "focus": "Chinese-language crypto industry news",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Foresight News",
+      "username": "Foresight_News",
+      "profile_url": "https://x.com/Foresight_News",
+      "category": "media",
+      "focus": "Chinese-language Web3 and policy news",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "BlockBeats",
+      "username": "BlockBeatsAsia",
+      "profile_url": "https://x.com/BlockBeatsAsia",
+      "category": "media",
+      "focus": "Chinese-language market and ecosystem news",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "TechFlow",
+      "username": "TechFlowPost",
+      "profile_url": "https://x.com/TechFlowPost",
+      "category": "media",
+      "focus": "Chinese-language Web3 and market reporting",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Odaily",
+      "username": "OdailyChina",
+      "profile_url": "https://x.com/OdailyChina",
+      "category": "media",
+      "focus": "Chinese-language blockchain industry news",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Glassnode",
+      "username": "glassnode",
+      "profile_url": "https://x.com/glassnode",
+      "category": "data",
+      "focus": "Onchain metrics and market intelligence",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "CryptoQuant",
+      "username": "cryptoquant_com",
+      "profile_url": "https://x.com/cryptoquant_com",
+      "category": "data",
+      "focus": "Exchange flows and onchain analytics",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Lookonchain",
+      "username": "Lookonchain",
+      "profile_url": "https://x.com/Lookonchain",
+      "category": "data",
+      "focus": "Wallet and whale activity tracking",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Arkham",
+      "username": "arkham",
+      "profile_url": "https://x.com/arkham",
+      "category": "data",
+      "focus": "Blockchain intelligence and entity-labelled flows",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Nansen",
+      "username": "nansen_ai",
+      "profile_url": "https://x.com/nansen_ai",
+      "category": "data",
+      "focus": "Wallet labels and onchain analytics",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "DefiLlama",
+      "username": "DefiLlama",
+      "profile_url": "https://x.com/DefiLlama",
+      "category": "data",
+      "focus": "DeFi TVL and protocol metrics",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Dune",
+      "username": "Dune",
+      "profile_url": "https://x.com/Dune",
+      "category": "data",
+      "focus": "Community onchain dashboards and queries",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Token Terminal",
+      "username": "TokenTerminal",
+      "profile_url": "https://x.com/TokenTerminal",
+      "category": "data",
+      "focus": "Protocol financial and fundamentals data",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Messari",
+      "username": "MessariCrypto",
+      "profile_url": "https://x.com/MessariCrypto",
+      "category": "data",
+      "focus": "Crypto research and asset data",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Coin Metrics",
+      "username": "coinmetrics",
+      "profile_url": "https://x.com/coinmetrics",
+      "category": "data",
+      "focus": "Network data and institutional research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Santiment",
+      "username": "santimentfeed",
+      "profile_url": "https://x.com/santimentfeed",
+      "category": "data",
+      "focus": "Onchain, social and development metrics",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "IntoTheBlock",
+      "username": "intotheblock",
+      "profile_url": "https://x.com/intotheblock",
+      "category": "data",
+      "focus": "Onchain market intelligence",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Kaiko",
+      "username": "KaikoData",
+      "profile_url": "https://x.com/KaikoData",
+      "category": "data",
+      "focus": "Digital asset market data",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "CryptoRank",
+      "username": "CryptoRank_io",
+      "profile_url": "https://x.com/CryptoRank_io",
+      "category": "data",
+      "focus": "Market, fundraising and token-unlock data",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Whale Alert",
+      "username": "whale_alert",
+      "profile_url": "https://x.com/whale_alert",
+      "category": "data",
+      "focus": "Large blockchain transaction alerts",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Binance",
+      "username": "binance",
+      "profile_url": "https://x.com/binance",
+      "category": "exchange",
+      "focus": "Official exchange announcements",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Coinbase",
+      "username": "coinbase",
+      "profile_url": "https://x.com/coinbase",
+      "category": "exchange",
+      "focus": "Official exchange and policy announcements",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Kraken",
+      "username": "krakenfx",
+      "profile_url": "https://x.com/krakenfx",
+      "category": "exchange",
+      "focus": "Exchange, custody and regulatory updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "OKX",
+      "username": "OKX",
+      "profile_url": "https://x.com/OKX",
+      "category": "exchange",
+      "focus": "Exchange and Web3 ecosystem announcements",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Bybit",
+      "username": "Bybit_Official",
+      "profile_url": "https://x.com/Bybit_Official",
+      "category": "exchange",
+      "focus": "Exchange and derivatives-market updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Bitget",
+      "username": "bitgetglobal",
+      "profile_url": "https://x.com/bitgetglobal",
+      "category": "exchange",
+      "focus": "Exchange and ecosystem announcements",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Gate.io",
+      "username": "gate_io",
+      "profile_url": "https://x.com/gate_io",
+      "category": "exchange",
+      "focus": "Exchange listings and platform updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "KuCoin",
+      "username": "kucoincom",
+      "profile_url": "https://x.com/kucoincom",
+      "category": "exchange",
+      "focus": "Exchange and token-market announcements",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "HTX",
+      "username": "HTX_Global",
+      "profile_url": "https://x.com/HTX_Global",
+      "category": "exchange",
+      "focus": "Exchange and ecosystem announcements",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Binance Research",
+      "username": "BinanceResearch",
+      "profile_url": "https://x.com/BinanceResearch",
+      "category": "exchange",
+      "focus": "Exchange research and market reports",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Ethereum",
+      "username": "ethereum",
+      "profile_url": "https://x.com/ethereum",
+      "category": "protocol",
+      "focus": "Official Ethereum protocol updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Solana",
+      "username": "solana",
+      "profile_url": "https://x.com/solana",
+      "category": "protocol",
+      "focus": "Official Solana ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Bitcoin",
+      "username": "Bitcoin",
+      "profile_url": "https://x.com/Bitcoin",
+      "category": "protocol",
+      "focus": "Bitcoin network and ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Base",
+      "username": "base",
+      "profile_url": "https://x.com/base",
+      "category": "protocol",
+      "focus": "Base network and ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Arbitrum",
+      "username": "arbitrum",
+      "profile_url": "https://x.com/arbitrum",
+      "category": "protocol",
+      "focus": "Arbitrum network governance and upgrades",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Optimism",
+      "username": "Optimism",
+      "profile_url": "https://x.com/Optimism",
+      "category": "protocol",
+      "focus": "OP Stack and Superchain updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Polygon",
+      "username": "0xPolygon",
+      "profile_url": "https://x.com/0xPolygon",
+      "category": "protocol",
+      "focus": "Polygon network and scaling updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Avalanche",
+      "username": "avax",
+      "profile_url": "https://x.com/avax",
+      "category": "protocol",
+      "focus": "Avalanche network and ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Chainlink",
+      "username": "chainlink",
+      "profile_url": "https://x.com/chainlink",
+      "category": "protocol",
+      "focus": "Oracle, CCIP and infrastructure updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Uniswap",
+      "username": "Uniswap",
+      "profile_url": "https://x.com/Uniswap",
+      "category": "protocol",
+      "focus": "DEX protocol and governance updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Aave",
+      "username": "aave",
+      "profile_url": "https://x.com/aave",
+      "category": "protocol",
+      "focus": "Lending protocol and governance updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "MakerDAO / Sky",
+      "username": "MakerDAO",
+      "profile_url": "https://x.com/MakerDAO",
+      "category": "protocol",
+      "focus": "Stablecoin and DeFi governance updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Lido",
+      "username": "LidoFinance",
+      "profile_url": "https://x.com/LidoFinance",
+      "category": "protocol",
+      "focus": "Liquid staking and governance updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Starknet",
+      "username": "Starknet",
+      "profile_url": "https://x.com/Starknet",
+      "category": "protocol",
+      "focus": "ZK scaling and ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Sui",
+      "username": "SuiNetwork",
+      "profile_url": "https://x.com/SuiNetwork",
+      "category": "protocol",
+      "focus": "Sui network and ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Aptos",
+      "username": "Aptos",
+      "profile_url": "https://x.com/Aptos",
+      "category": "protocol",
+      "focus": "Aptos network and ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Polkadot",
+      "username": "Polkadot",
+      "profile_url": "https://x.com/Polkadot",
+      "category": "protocol",
+      "focus": "Polkadot protocol and governance updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "NEAR",
+      "username": "NEARProtocol",
+      "profile_url": "https://x.com/NEARProtocol",
+      "category": "protocol",
+      "focus": "NEAR protocol and ecosystem updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Cosmos",
+      "username": "cosmos",
+      "profile_url": "https://x.com/cosmos",
+      "category": "protocol",
+      "focus": "Cosmos ecosystem and interoperability updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Celestia",
+      "username": "CelestiaOrg",
+      "profile_url": "https://x.com/CelestiaOrg",
+      "category": "protocol",
+      "focus": "Modular blockchain and data availability updates",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Vitalik Buterin",
+      "username": "VitalikButerin",
+      "profile_url": "https://x.com/VitalikButerin",
+      "category": "researcher",
+      "focus": "Ethereum cofounder; protocol research and design",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Anthony Sassano",
+      "username": "sassal0x",
+      "profile_url": "https://x.com/sassal0x",
+      "category": "researcher",
+      "focus": "Ethereum ecosystem and staking analysis",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Tim Beiko",
+      "username": "TimBeiko",
+      "profile_url": "https://x.com/TimBeiko",
+      "category": "researcher",
+      "focus": "Ethereum core developer coordination",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Justin Drake",
+      "username": "drakefjustin",
+      "profile_url": "https://x.com/drakefjustin",
+      "category": "researcher",
+      "focus": "Ethereum research and consensus design",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Dankrad Feist",
+      "username": "dankrad",
+      "profile_url": "https://x.com/dankrad",
+      "category": "researcher",
+      "focus": "Ethereum research and scaling",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Changpeng Zhao (CZ)",
+      "username": "cz_binance",
+      "profile_url": "https://x.com/cz_binance",
+      "category": "researcher",
+      "focus": "Exchange and industry commentary; founder perspective",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Brian Armstrong",
+      "username": "brian_armstrong",
+      "profile_url": "https://x.com/brian_armstrong",
+      "category": "researcher",
+      "focus": "Crypto policy and exchange industry perspective",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Michael Saylor",
+      "username": "saylor",
+      "profile_url": "https://x.com/saylor",
+      "category": "researcher",
+      "focus": "Bitcoin treasury and institutional adoption",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Lyn Alden",
+      "username": "LynAldenContact",
+      "profile_url": "https://x.com/LynAldenContact",
+      "category": "researcher",
+      "focus": "Macro, liquidity and Bitcoin research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Arthur Hayes",
+      "username": "CryptoHayes",
+      "profile_url": "https://x.com/CryptoHayes",
+      "category": "researcher",
+      "focus": "Macro and crypto market commentary",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Raoul Pal",
+      "username": "RaoulGMI",
+      "profile_url": "https://x.com/RaoulGMI",
+      "category": "researcher",
+      "focus": "Macro, liquidity and digital assets",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Anthony Pompliano",
+      "username": "APompliano",
+      "profile_url": "https://x.com/APompliano",
+      "category": "researcher",
+      "focus": "Bitcoin, markets and institutional adoption",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Michaël van de Poppe",
+      "username": "CryptoMichNL",
+      "profile_url": "https://x.com/CryptoMichNL",
+      "category": "researcher",
+      "focus": "Technical and macro market analysis",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Rekt Capital",
+      "username": "rektcapital",
+      "profile_url": "https://x.com/rektcapital",
+      "category": "researcher",
+      "focus": "Bitcoin cycle and technical analysis",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Ali Martinez",
+      "username": "ali_charts",
+      "profile_url": "https://x.com/ali_charts",
+      "category": "researcher",
+      "focus": "Technical analysis and onchain signals",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Willy Woo",
+      "username": "WillyWoo",
+      "profile_url": "https://x.com/WillyWoo",
+      "category": "researcher",
+      "focus": "Bitcoin onchain and cycle analysis",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "PlanB",
+      "username": "100trillionUSD",
+      "profile_url": "https://x.com/100trillionUSD",
+      "category": "researcher",
+      "focus": "Bitcoin stock-to-flow model commentary",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Dylan LeClair",
+      "username": "DylanLeClair_",
+      "profile_url": "https://x.com/DylanLeClair_",
+      "category": "researcher",
+      "focus": "Bitcoin markets and institutional research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Preston Pysh",
+      "username": "PrestonPysh",
+      "profile_url": "https://x.com/PrestonPysh",
+      "category": "researcher",
+      "focus": "Bitcoin, investing and macro",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Tuur Demeester",
+      "username": "TuurDemeester",
+      "profile_url": "https://x.com/TuurDemeester",
+      "category": "researcher",
+      "focus": "Bitcoin macro and monetary research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Jameson Lopp",
+      "username": "lopp",
+      "profile_url": "https://x.com/lopp",
+      "category": "researcher",
+      "focus": "Bitcoin engineering and self-custody",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "ZachXBT",
+      "username": "zachxbt",
+      "profile_url": "https://x.com/zachxbt",
+      "category": "researcher",
+      "focus": "Onchain investigations and security incidents",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Taylor Monahan",
+      "username": "tayvano_",
+      "profile_url": "https://x.com/tayvano_",
+      "category": "researcher",
+      "focus": "Wallet security and onchain investigations",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "samczsun",
+      "username": "samczsun",
+      "profile_url": "https://x.com/samczsun",
+      "category": "researcher",
+      "focus": "Smart-contract security research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "0xfoobar",
+      "username": "0xfoobar",
+      "profile_url": "https://x.com/0xfoobar",
+      "category": "researcher",
+      "focus": "Smart-contract security and Web3 research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "banteg",
+      "username": "bantg",
+      "profile_url": "https://x.com/bantg",
+      "category": "researcher",
+      "focus": "DeFi protocol engineering and security",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Mudit Gupta",
+      "username": "Mudit__Gupta",
+      "profile_url": "https://x.com/Mudit__Gupta",
+      "category": "researcher",
+      "focus": "Blockchain and smart-contract security",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "0xngmi",
+      "username": "0xngmi",
+      "profile_url": "https://x.com/0xngmi",
+      "category": "researcher",
+      "focus": "DeFi data methodology and analytics",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Jesse Pollak",
+      "username": "jessepollak",
+      "profile_url": "https://x.com/jessepollak",
+      "category": "researcher",
+      "focus": "Base ecosystem and product development",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Anatoly Yakovenko",
+      "username": "aeyakovenko",
+      "profile_url": "https://x.com/aeyakovenko",
+      "category": "researcher",
+      "focus": "Solana cofounder; protocol engineering",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Hasu",
+      "username": "hasufl",
+      "profile_url": "https://x.com/hasufl",
+      "category": "researcher",
+      "focus": "Crypto market structure and research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Santiago Santos",
+      "username": "santiagoroel",
+      "profile_url": "https://x.com/santiagoroel",
+      "category": "researcher",
+      "focus": "Crypto venture and macro research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Julien Bittel",
+      "username": "BittelJulien",
+      "profile_url": "https://x.com/BittelJulien",
+      "category": "researcher",
+      "focus": "Liquidity and macro cycle analysis",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Spencer Noon",
+      "username": "spencernoon",
+      "profile_url": "https://x.com/spencernoon",
+      "category": "researcher",
+      "focus": "Crypto market structure and venture research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Alex Thorn",
+      "username": "intangiblecoins",
+      "profile_url": "https://x.com/intangiblecoins",
+      "category": "researcher",
+      "focus": "Galaxy research and digital asset analysis",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Frank Researcher",
+      "username": "FrankResearcher",
+      "profile_url": "https://x.com/FrankResearcher",
+      "category": "researcher",
+      "focus": "Fundamental and data-driven crypto research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Jason Choi",
+      "username": "mrjasonchoi",
+      "profile_url": "https://x.com/mrjasonchoi",
+      "category": "researcher",
+      "focus": "DeFi and venture research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "DeFi Dad",
+      "username": "DeFi_Dad",
+      "profile_url": "https://x.com/DeFi_Dad",
+      "category": "researcher",
+      "focus": "DeFi protocol education and research",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Rewkang",
+      "username": "Rewkang",
+      "profile_url": "https://x.com/Rewkang",
+      "category": "researcher",
+      "focus": "DeFi market structure and risk commentary",
+      "enabled": true,
+      "verification_status": "pending"
+    },
+    {
+      "name": "Ignas",
+      "username": "DefiIgnas",
+      "profile_url": "https://x.com/DefiIgnas",
+      "category": "researcher",
+      "focus": "DeFi protocol and token research",
+      "enabled": true,
+      "verification_status": "pending"
+    }
+  ]
+}
