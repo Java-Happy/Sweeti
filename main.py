@@ -9,7 +9,10 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import StreamingResponse
 import json
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+import sqlite3
+
+from auth import authenticate, create_user, get_current_user, init_auth_db, issue_token
 
 from storage import (init_db, save_market_snapshot, get_database_stats, get_connection, get_collection_runs, get_latest_market_context, save_ai_brief, get_latest_ai_brief)
 
@@ -24,6 +27,7 @@ CACHE_SECONDS = 60
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
+    init_auth_db()
     start_scheduler()
 
     try:
@@ -62,6 +66,16 @@ class AnalyzeRequest(BaseModel):
 class ChatRequest(BaseModel):
     message: str
     conversation: list[dict] = []
+
+
+class RegisterRequest(BaseModel):
+    username: str = Field(min_length=3, max_length=24, pattern=r"^[A-Za-z0-9_]+$")
+    password: str = Field(min_length=10, max_length=128)
+
+
+class LoginRequest(BaseModel):
+    username: str = Field(min_length=1, max_length=24)
+    password: str = Field(min_length=1, max_length=128)
 
 
 async def get_market_data(vs_currency: str, per_page: int, page: int):
@@ -133,6 +147,34 @@ async def root():
         "version": "0.3.0",
         "status": "running"
     }
+
+
+@app.post("/api/auth/register")
+async def auth_register(request: RegisterRequest):
+    username = request.username.strip()
+    try:
+        user = create_user(username, request.password, role="member")
+    except sqlite3.IntegrityError:
+        raise HTTPException(status_code=409, detail="用户名已被注册")
+    return {"status": "success", "user": user}
+
+
+@app.post("/api/auth/login")
+async def auth_login(request: LoginRequest):
+    user = authenticate(request.username.strip(), request.password)
+    if user is None:
+        raise HTTPException(status_code=401, detail="用户名或密码错误")
+    return {
+        "access_token": issue_token(user),
+        "token_type": "bearer",
+        "expires_in": 604800,
+        "user": user,
+    }
+
+
+@app.get("/api/auth/me")
+async def auth_me(user: dict = __import__("fastapi").Depends(get_current_user)):
+    return {"user": user}
 
 
 @app.get("/api/health")
