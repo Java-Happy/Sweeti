@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import MarketChart from "@/components/MarketChart";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
+
 const navItems = [
   { icon: "◈", label: "市场总览", tag: "01" },
   { icon: "⌁", label: "Market Scanner", tag: "02" },
@@ -30,7 +32,7 @@ export default function Home() {
 
     const getJson = async (path: string) => {
       const response = await fetch(
-        "http://127.0.0.1:8000" + path,
+        API_BASE_URL + path,
         { cache: "no-store" }
       );
       if (!response.ok) {
