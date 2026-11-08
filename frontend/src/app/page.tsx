@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import MarketChart from "@/components/MarketChart";
+import AIWorkspace from "@/components/AIWorkspace";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
@@ -262,21 +263,17 @@ export default function Home() {
 
             <div className="panel intelligence-panel">
               <div className="panel-header">
-                <div><div className="panel-title">AI INTELLIGENCE</div><div className="panel-subtitle">智能分析引擎</div></div>
+                <div><div className="panel-title">AI INTELLIGENCE</div><div className="panel-subtitle">Qwen3 市场简报与智能问答</div></div>
                 <span className="ai-orb">✳</span>
               </div>
               <div className="ai-status-card">
                 <div className="ai-status-top"><span className="live-dot" /> {aiOnline ? "LOCAL MODEL ONLINE" : "LOCAL MODEL OFFLINE"}</div>
                 <div className="ai-model-name">Qwen3 <span>4B</span></div>
-                <p>本地推理引擎已就绪，等待行情与新闻数据输入。</p>
+                <p>本地推理引擎 · 行情上下文增强</p>
                 <div className="ai-progress"><span /></div>
-                <div className="ai-progress-label"><span>ENGINE STATUS</span><b>READY</b></div>
+                <div className="ai-progress-label"><span>ENGINE STATUS</span><b>{aiOnline ? "READY" : "OFFLINE"}</b></div>
               </div>
-              <div className="intel-list">
-                <div className="intel-item"><span className="intel-icon">⌁</span><div><b>Market Agent</b><small>市场数据分析模块</small></div><em>待接入</em></div>
-                <div className="intel-item"><span className="intel-icon purple-text">◎</span><div><b>News Agent</b><small>新闻与社交情绪</small></div><em>待开发</em></div>
-                <div className="intel-item"><span className="intel-icon orange-text">✳</span><div><b>Chief Analyst</b><small>综合研判与策略报告</small></div><em>待开发</em></div>
-              </div>
+              <AIWorkspace />
             </div>
           </section>
 
