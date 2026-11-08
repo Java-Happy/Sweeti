@@ -17,8 +17,11 @@ A local cryptocurrency market dashboard built with **FastAPI**, **Next.js**, **S
 ```text
 .
 ├── main.py
+├── auth.py
 ├── scheduler.py
 ├── storage.py
+├── scripts/
+│   └── create_svip_accounts.py
 ├── test_collect.py
 ├── requirements.txt
 └── frontend/
@@ -46,6 +49,14 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+Create the three initial SVIP accounts once. The script generates strong random passwords and prints them only in your local terminal:
+
+```powershell
+python scripts/create_svip_accounts.py
+```
+
+The initial usernames are `svip01`, `svip02`, and `svip03`. Save each generated password in a password manager; the script does not store or print passwords again for accounts that already exist. New registrations receive the standard `member` role.
+
 Start FastAPI:
 
 ```powershell
@@ -58,6 +69,8 @@ Useful endpoints:
 
 - `GET /` — service information
 - `GET /api/health` — health check
+- `POST /api/auth/register` / `POST /api/auth/login` — member registration and login
+- `GET /api/auth/me` — current authenticated member
 - `GET /api/ai/status` — Ollama status
 - `GET /api/market/status` — market-data status
 - `GET /api/market/coins` — latest coin data
@@ -88,6 +101,7 @@ The backend supports these environment variables:
 |---|---|---|
 | `CRYPTO_RADAR_DB_PATH` | SQLite database file path | `D:\CryptoRadarAI\database\crypto_radar.db` |
 | `FRONTEND_ORIGINS` | Comma-separated allowed frontend origins for CORS | `http://localhost:3000,http://127.0.0.1:3000` |
+| `CRYPTO_RADAR_AUTH_SECRET` | Optional signing secret for login tokens (at least 32 characters); local development creates an ignored `.auth_secret` file automatically | auto-generated locally |
 
 For example, in PowerShell:
 
@@ -104,6 +118,8 @@ The frontend variable `NEXT_PUBLIC_API_BASE_URL` is documented in `frontend/.env
 - Set `FRONTEND_ORIGINS` to the exact deployed frontend origin(s); do not use a wildcard with credentialed requests.
 - Set `NEXT_PUBLIC_API_BASE_URL` to the publicly reachable backend URL before building the frontend.
 - Keep API keys and other secrets in environment variables; never commit them.
+- Set a unique `CRYPTO_RADAR_AUTH_SECRET` of at least 32 characters in production and persist it securely. The local `.auth_secret` file is ignored by Git.
+- User passwords are stored as PBKDF2-HMAC-SHA256 hashes; login tokens expire after seven days.
 - Run the backend and frontend as separate services behind HTTPS in production.
 - Use a persistent database/volume and a process manager for the backend scheduler.
 
