@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import MarketChart from "@/components/MarketChart";
 import AIWorkspace from "@/components/AIWorkspace";
+import AuthGate from "@/components/AuthGate";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
@@ -132,6 +133,7 @@ export default function Home() {
   const latestRun = runs[0];
 
   return (
+    <AuthGate>
     <main className="radar-app">
       <aside className="sidebar">
         <div className="brand">
@@ -321,5 +323,6 @@ export default function Home() {
         </div>
       </section>
     </main>
+    </AuthGate>
   );
 }
