@@ -32,8 +32,7 @@ A local cryptocurrency market dashboard built with **FastAPI**, **Next.js**, **S
 - Node.js 20.9 or newer
 - npm
 - Ollama (optional; required for local AI analysis)
-- A CoinGecko API key is recommended for more reliable market-data access. Configure it according to the CoinGecko request code in `main.py`.
-
+- 
 ## Run locally on Windows
 
 ### 1. Backend
@@ -87,7 +86,7 @@ The backend supports these environment variables:
 
 | Variable | Purpose | Default |
 |---|---|---|
-| `CRYPTO_RADAR_DB_PATH` | SQLite database file path | `D:\\CryptoRadarAI\\database\\crypto_radar.db` |
+| `CRYPTO_RADAR_DB_PATH` | SQLite database file path | `D:\CryptoRadarAI\database\crypto_radar.db` |
 | `FRONTEND_ORIGINS` | Comma-separated allowed frontend origins for CORS | `http://localhost:3000,http://127.0.0.1:3000` |
 
 For example, in PowerShell:
