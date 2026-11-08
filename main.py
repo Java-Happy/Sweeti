@@ -5,7 +5,7 @@ import time
 import os
 
 import httpx
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.responses import StreamingResponse
 import json
 from fastapi.middleware.cors import CORSMiddleware
@@ -173,7 +173,7 @@ async def auth_login(request: LoginRequest):
 
 
 @app.get("/api/auth/me")
-async def auth_me(user: dict = __import__("fastapi").Depends(get_current_user)):
+async def auth_me(user: dict = Depends(get_current_user)):
     return {"user": user}
 
 
