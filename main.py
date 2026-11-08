@@ -9,7 +9,7 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from storage import init_db, save_market_snapshot, get_database_stats, get_connection, get_collection_runs
+from storage import (init_db, save_market_snapshot, get_database_stats, get_connection, get_collection_runs, get_latest_market_context, save_ai_brief, get_latest_ai_brief)
 
 
 OLLAMA_URL = "http://127.0.0.1:11434"
@@ -55,6 +55,11 @@ app.add_middleware(
 
 class AnalyzeRequest(BaseModel):
     prompt: str
+
+
+class ChatRequest(BaseModel):
+    message: str
+    conversation: list[dict] = []
 
 
 async def get_market_data(vs_currency: str, per_page: int, page: int):
@@ -357,3 +362,89 @@ async def market_collection_runs(
         "runs": runs
     }
 
+
+
+async def call_ollama(prompt: str, timeout: int = 180):
+    async with httpx.AsyncClient(timeout=timeout) as client:
+        response = await client.post(
+            f"{OLLAMA_URL}/api/generate",
+            json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False,
+                  "options": {"temperature": 0.2}}
+        )
+        response.raise_for_status()
+        return response.json().get("response", "")
+
+
+def build_market_prompt(coins):
+    if not coins:
+        raise HTTPException(status_code=409, detail="数据库暂无行情快照，请等待首次采集完成")
+    lines = []
+    for coin in coins:
+        change = coin.get("price_change_24h")
+        change_text = f"{change:+.2f}%" if isinstance(change, (int, float)) else "N/A"
+        lines.append(
+            f"{coin.get('market_cap_rank') or '-'}. {str(coin.get('symbol') or '').upper()} "
+            f"{coin.get('name')}: price=${coin.get('current_price')}, 24h={change_text}, "
+            f"volume=${coin.get('total_volume')}"
+        )
+    return (
+        "你是 Crypto Radar 的加密市场研究助手。请使用以下数据库行情快照生成中文市场简报。"
+        "只描述数据支持的结论，不要编造技术指标、支撑阻力或实时新闻。按以下结构输出："
+        "【市场概况】【核心资产】【异动观察】【风险提示】【观察清单】。"
+        "明确说明数据来自 CoinGecko 快照、涨跌幅为24小时，不构成投资建议。\n\n"
+        "行情数据：\n" + "\n".join(lines)
+    )
+
+
+@app.get("/api/ai/brief")
+async def ai_latest_brief():
+    return {"brief": get_latest_ai_brief(), "model": OLLAMA_MODEL}
+
+
+@app.post("/api/ai/brief/generate")
+async def ai_generate_brief():
+    coins = get_latest_market_context(250)
+    if not coins:
+        raise HTTPException(status_code=409, detail="数据库暂无行情快照")
+    snapshot_at = max((coin.get("captured_at") or "" for coin in coins), default=None)
+    try:
+        content = await call_ollama(build_market_prompt(coins), timeout=240)
+        saved = save_ai_brief(content, OLLAMA_MODEL, snapshot_at)
+        return {"brief": {**saved, "content": content, "source_snapshot_at": snapshot_at}}
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=503, detail=f"Ollama 请求失败：{exc}")
+
+
+@app.post("/api/ai/chat")
+async def ai_chat(request: ChatRequest):
+    message = request.message.strip()
+    if not message:
+        raise HTTPException(status_code=400, detail="问题不能为空")
+    if len(message) > 4000:
+        raise HTTPException(status_code=413, detail="单条问题最多 4000 字符")
+    coins = get_latest_market_context(100)
+    market_lines = []
+    for coin in coins:
+        change = coin.get("price_change_24h")
+        change_text = f"{change:+.2f}%" if isinstance(change, (int, float)) else "N/A"
+        market_lines.append(
+            f"{str(coin.get('symbol') or '').upper()} {coin.get('name')}: "
+            f"${coin.get('current_price')} ({change_text} 24h)"
+        )
+    history = request.conversation[-8:]
+    history_text = "\n".join(
+        f"{'用户' if item.get('role') == 'user' else '助手'}：{str(item.get('content', ''))[:2000]}"
+        for item in history if item.get("role") in ("user", "assistant")
+    )
+    prompt = (
+        "你是 Crypto Radar 内置的 Qwen3 加密市场助手。用中文回答并结合最新数据库行情；"
+        "若数据没有覆盖用户问题，坦诚说明。不要假装拥有实时新闻或交易所原生K线，"
+        "不要承诺收益。区分事实、推断和风险，不构成投资建议。\n\n"
+        "最新行情快照：\n" + ("\n".join(market_lines) if market_lines else "暂无行情快照") +
+        "\n\n最近对话：\n" + history_text + "\n\n用户当前问题：\n" + message
+    )
+    try:
+        answer = await call_ollama(prompt, timeout=240)
+        return {"model": OLLAMA_MODEL, "answer": answer, "market_context_coins": len(coins)}
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=503, detail=f"Qwen3 暂时不可用：{exc}")
