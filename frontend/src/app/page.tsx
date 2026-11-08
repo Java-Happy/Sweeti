@@ -15,7 +15,7 @@ const navItems = [
 
 
 export default function Home() {
-  const [activeNav, setActiveNav] = useState("????");
+  const [activeNav, setActiveNav] = useState("市场总览");
   const [search, setSearch] = useState("");
   const [coins, setCoins] = useState<any[]>([]);
   const [dbStats, setDbStats] = useState({ coins: 0, snapshots: 0 });
@@ -192,11 +192,11 @@ export default function Home() {
           <section className="ticker-strip">
             {coins
               .filter((coin: any) =>
-                ["btc", "eth", "bnb", "xrp", "sol", "solana"].includes(
+                ["btc", "eth", "bnb", "xrp", "sol"].includes(
                   String(coin.symbol || "").toLowerCase()
                 )
               )
-              .slice(0, 6)
+              .slice(0, 5)
               .map((coin: any) => {
                 const change = Number(coin.price_change_percentage_24h || 0);
                 return (
@@ -251,8 +251,8 @@ export default function Home() {
                 <MarketChart />
               </div>
               <div className="chart-footer">
-                <span><i className="legend-line" /> ????</span>
-                <span>?????CoinGecko ? SQLite</span>
+                <span><i className="legend-line" /> 价格走势</span>
+                <span>数据来源：CoinGecko 行情快照 · SQLite</span>
               </div>
             </div>
 
@@ -287,15 +287,15 @@ export default function Home() {
                 {filteredCoins.map((coin) => (
                   <div className="table-row" key={coin.symbol}>
                     <div className="coin-cell"><div className={`coin-logo ${coin.symbol.toLowerCase()}`}>{coin.symbol.slice(0, 1)}</div><div><b>{coin.symbol}</b><small>{coin.name}</small></div></div>
-                    <span className="muted-value">${coin.current_price == null ? "?" : Number(coin.current_price).toLocaleString("en-US", { maximumFractionDigits: 6 })}</span>
-                    <span className="muted-value">{coin.price_change_percentage_24h == null ? "?" : Number(coin.price_change_percentage_24h).toFixed(2) + "%"}</span>
-                    <span className="muted-value">{coin.total_volume == null ? "?" : "$" + Number(coin.total_volume).toLocaleString("en-US", { notation: "compact" })}</span>
+                    <span className="muted-value">${coin.current_price == null ? "—" : Number(coin.current_price).toLocaleString("en-US", { maximumFractionDigits: 6 })}</span>
+                    <span className="muted-value">{coin.price_change_percentage_24h == null ? "—" : Number(coin.price_change_percentage_24h).toFixed(2) + "%"}</span>
+                    <span className="muted-value">{coin.total_volume == null ? "—" : "$" + Number(coin.total_volume).toLocaleString("en-US", { notation: "compact" })}</span>
                     <span><i className="table-status" />LIVE</span>
                   </div>
                 ))}
                 {filteredCoins.length === 0 && <div className="empty-state">没有找到匹配的资产</div>}
               </div>
-              <div className="table-note">CoinGecko LIVE ? Updated: {lastUpdated || "Loading..."}</div>
+              <div className="table-note">CoinGecko LIVE · 更新时间：{lastUpdated || "加载中..."}</div>
             </div>
 
             <div className="panel collection-panel">
@@ -312,7 +312,7 @@ export default function Home() {
                 <div><span>数据库</span><b>SQLite</b></div>
                 <div><span>Task Status</span><b className={latestRun?.status === "success" ? "status-green" : "status-yellow"}>{latestRun?.status === "success" ? "RUNNING OK" : "WAITING"}</b></div>
               </div>
-              <div className="collection-tip"><span>?</span> {latestRun ? "Latest run: " + new Date(latestRun.started_at).toLocaleString() + " ? Saved: " + latestRun.saved_count : "No collection records yet"}</div>
+              <div className="collection-tip"><span>i</span> {latestRun ? "最近采集：" + new Date(latestRun.started_at).toLocaleString() + " · 保存：" + latestRun.saved_count + " 条" : "暂无采集记录"}</div>
             </div>
           </section>
 
