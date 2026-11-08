@@ -62,12 +62,29 @@ export default function AIWorkspace() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: question,
-          conversation: messages.slice(-8)
+          conversation: messages.slice(-4)
         })
       });
-      const payload = await response.json();
-      if (!response.ok) throw new Error(payload.detail || "Qwen3 请求失败");
-      setMessages([...nextMessages, { role: "assistant", content: payload.answer || "模型没有返回内容。" }]);
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload.detail || "Qwen3 请求失败");
+      }
+      if (!response.body) throw new Error("浏览器不支持流式响应");
+
+      // 先插入空的助手消息，再逐块更新，形成实时打字效果。
+      const assistantMessages: Message[] = [...nextMessages, { role: "assistant", content: "" }];
+      setMessages(assistantMessages);
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let answer = "";
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        answer += decoder.decode(value, { stream: true });
+        setMessages([...nextMessages, { role: "assistant", content: answer }]);
+      }
+      answer += decoder.decode();
+      setMessages([...nextMessages, { role: "assistant", content: answer || "模型没有返回内容。" }]);
     } catch (error) {
       setMessages([...nextMessages, {
         role: "assistant",
@@ -124,14 +141,14 @@ export default function AIWorkspace() {
                 <p>{message.content}</p>
               </div>
             ))}
-            {sending && <div className="chat-thinking"><i /> Qwen3 正在分析行情…</div>}
+            {sending && <div className="chat-thinking"><i /> Qwen3 正在生成 · 流式输出中</div>}
             <div ref={messagesEndRef} />
           </div>
           <form className="chat-form" onSubmit={sendMessage}>
             <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="向 Qwen3 提问，例如：BTC 当前走势如何？" maxLength={4000} />
             <button type="submit" disabled={!input.trim() || sending}>{sending ? "分析中" : "发送 ↗"}</button>
           </form>
-          <div className="chat-disclaimer">回答基于本地行情快照及模型推理，仅供研究参考，不构成投资建议。</div>
+          <div className="chat-disclaimer">LIVE STREAM · TOP 30 MARKET CONTEXT · 回答基于本地行情快照及模型推理，仅供研究参考。</div>
         </div>
       )}
     </div>
