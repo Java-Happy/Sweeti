@@ -1,8 +1,9 @@
-﻿import sqlite3
+﻿import os
+import sqlite3
 from pathlib import Path
 from datetime import datetime, timezone
 
-DB_PATH = Path(r"D:\CryptoRadarAI\database\crypto_radar.db")
+DB_PATH = Path(os.getenv("CRYPTO_RADAR_DB_PATH", r"D:\CryptoRadarAI\database\crypto_radar.db"))
 
 
 def get_connection():
