@@ -438,7 +438,7 @@ async def ai_chat(request: ChatRequest):
 
     # 保留最近 4 条消息，并限制单条历史长度。
     history = request.conversation[-4:]
-    history_text = "\\n".join(
+    history_text = "\n".join(
         f"{'用户' if item.get('role') == 'user' else '助手'}：{str(item.get('content', ''))[:800]}"
         for item in history if item.get("role") in ("user", "assistant")
     )
@@ -446,8 +446,8 @@ async def ai_chat(request: ChatRequest):
         "你是 Crypto Radar 内置的 Qwen3 加密市场助手。请用中文简洁回答，优先给结论和关键依据。"
         "结合最新数据库行情；数据未覆盖时坦诚说明。不要编造实时新闻、技术指标或交易所原生K线，"
         "区分事实、推断和风险，不承诺收益。\n\n"
-        "最新行情（CoinGecko快照）：\n" + ("\\n".join(market_lines) if market_lines else "暂无行情快照") +
-        "\\n\n最近对话：\n" + history_text + "\\n\n用户当前问题：\n" + message
+        "最新行情（CoinGecko快照）：\n" + ("\n".join(market_lines) if market_lines else "暂无行情快照") +
+        "\n\n最近对话：\n" + history_text + "\n\n用户当前问题：\n" + message
     )
 
     async def token_stream():
@@ -480,7 +480,7 @@ async def ai_chat(request: ChatRequest):
                         if chunk.get("done"):
                             break
         except Exception as exc:
-            yield f"\\n\\n[Qwen3 请求中断：{str(exc)}]"
+            yield f"\n\n[Qwen3 请求中断：{str(exc)}]"
 
     return StreamingResponse(
         token_stream(),
